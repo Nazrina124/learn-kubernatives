@@ -22,7 +22,7 @@ spec:
 ---
 
 apiVersion: v1
-kind: ReplicaSet
+kind: pod
 metadata:
   name: rs-01pod
   labels:
