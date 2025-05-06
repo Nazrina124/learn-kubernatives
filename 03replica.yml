@@ -22,7 +22,7 @@ spec:
 ---
 
 apiVersion: v1
-kind: pod
+kind: Pod
 metadata:
   name: rs-01pod
   labels:
