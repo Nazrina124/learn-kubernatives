@@ -31,3 +31,6 @@ spec:
   containers:
     - name: nginx
       image: docker.io/nginx
+
+
+##### labels should be always unique

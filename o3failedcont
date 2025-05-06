@@ -1,0 +1,8 @@
+apiversion: v1
+kind: pod
+metadata:
+   name: sleep
+spec:
+  containers:
+    - name: nginx
+      image: redhat/ubi9
