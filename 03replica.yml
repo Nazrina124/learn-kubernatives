@@ -4,18 +4,18 @@ metadata:
   name: rs-01
   labels:
     app: nginx
-spec:
+spec:                                      ###Spec defines the specification of the desired behavior of the ReplicaSet.
   # modify replicas according to your case
-  replicas: 3
-  selector:
+  replicas: 3       #####Replicas is the number of desired pods. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1
+  selector:        ######### Selector is a label query over pods that should match the replica count.
     matchLabels:
       app: nginx
-  template:
+  template:       ##########  Template is the object that describes the pod that will be created if insufficient replicas are detected.
     metadata:
       labels:
         app: nginx
-    spec:
-      containers:
+    spec:                  ##### desired behavior of the pod.
+      containers:               ######List of containers belonging to the pod.
       - name: nginx
         image: docker.io/nginx
 
@@ -33,4 +33,10 @@ spec:
       image: docker.io/nginx
 
 
-##### labels should be always unique
+##### selector and matchlabels connect pods and containers to talk through unique lables..labels should be always unique
+
+#####Replica has the limitation as any changes in the version does not get  updated hence to solve the issue comes deployment
+
+
+####what is POD?  Pod is a collection of containers that can run on a host.
+##### Binding ties one object to another; for example, a pod is bound to a node by a scheduler. throgh namespace, body, dryrun, fieldmange
