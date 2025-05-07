@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-06
+  labels:
+    appName: nginx
+    example: service
+spec:
+  containers:
+    - name: nginx
+      image: docker.io/nginx
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-06
+spec:
+  selector:
+    appName: nginx
+    example: service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: v1
+kind: Pod                      #####cluster IP:  Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster
+metadata:
+  name: debug-06
+spec:
+  containers:
+    - name: debug
+      image: docker.io/rkalluru/debug
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-06-np
+spec:
+  type: NodePort           ###### Exposes the Service on each Node's IP at a static port (the NodePort).
+  selector:
+    appName: nginx
+    example: service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+
+aapiVersion: v1
+kind: Service
+metadata:
+  name: nginx-06-np
+spec:
+  type: LoadBalancer   ##### Exposes the Service externally using an external load balancer. Kubernetes does not directly offer a load balancing component;
+  selector:
+    appName: nginx
+    example: service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+
+----
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  namespace: prod
+spec:
+  type: ExternalName   ### CNAME is Name pointing to another name is called CName kubene can create Cname 
+  externalName: my.database.example.com   
+
+
+
+  ###Headless Service 
+  ####Sometimes you don't need load-balancing and a single Service IP. In this case, you can create what are termed headless Services, by explicitly specifying "None" for the cluster IP address (.spec.clusterIP).
+
+#### You can use a headless Service to interface with other service discovery mechanisms, without being tied to Kubernetes' implementation.
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-06-headless    ### discovery is nodes permission write and read. talking
+spec:
+  selector:
+    appName: nginx
+    type: deploy
+  clusterIP: None
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+
+----

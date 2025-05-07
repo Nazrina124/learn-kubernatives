@@ -17,3 +17,7 @@ spec:
       containers:              
       - name: nginx
         image: docker.io/nginx:1.24
+
+    #####Deployment enables declarative updates for Pods and ReplicaSets.
+
+    ###### staefulset
