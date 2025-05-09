@@ -1,39 +1,13 @@
-##If you want to control traffic flow at the IP address or port level (OSI layer 3 or 4), NetworkPolicies allow you to specify rules for traffic flow within your cluster, and also between Pods and the outside world. Your cluster must use a network plugin that supports NetworkPolicy enforcement.
-
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: backend
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: frontend
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: debug
-  namespace: frontend
-  labels:
-    appType: UI
-spec:
-  containers:
-    - name: debug
-      image: rkalluru/debug
----
-apiVersion: v1
 kind: Pod
 metadata:
   name: nginx
   namespace: backend
   labels:
-   appType: API
+    appType: API
 spec:
   containers:
     - name: nginx
       image: nginx
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -41,18 +15,22 @@ metadata:
   name: allow-only-frontend
   namespace: backend
 spec:
-  podSelector:     ###to apply for all {}
+  podSelector:
     matchLabels:
-      appType: API   
+      appType: API
   policyTypes:
   - Ingress
   - Egress
   ingress:
   - from:
+    - namespaceSelector:
+        matchLabels:
+          project: demo
     - podSelector:
         matchLabels:
-          appTYPE: UI
+          appType: UI
     ports:
     - protocol: TCP
       port: 80
-
+  egress:
+  - {}
