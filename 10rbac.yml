@@ -35,7 +35,7 @@ metadata:
   namespace: default
   name: default-ns-pod-reader
 rules:
-- apiGroups: [""] 
+- apiGroups: [""]
   resources: ["pods"]
   verbs: ["get", "watch", "list"]
 
