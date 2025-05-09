@@ -33,3 +33,26 @@ spec:
   containers:
     - name: nginx
       image: nginx
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-only-frontend
+  namespace: backend
+spec:
+  podSelector:     ###to apply for all {}
+    matchLabels:
+      appType: API   
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          appTYPE: UI
+    ports:
+    - protocol: TCP
+      port: 80
+
