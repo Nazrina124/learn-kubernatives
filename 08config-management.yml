@@ -118,9 +118,13 @@ spec:
       env:
     - name: password
       valueFrom:
-      configMapKeyRef:
+      SecretKeyRef:
               name: secret07-01       # The ConfigMap this value comes from.
               key:  password
+
+
+###ConfigMap sumup  declare data value then  configMapKeyRef configMap volumeMounts secrets
+
 
 
 

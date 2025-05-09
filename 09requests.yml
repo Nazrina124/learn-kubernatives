@@ -1,0 +1,24 @@
+##### Resource Management
+#### Huge pages
+### resources meaning required of cpu monior the usage and update the files.requests are mandatory while limits are no gurante for containers nothing for pod.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-09
+spec:
+  containers:
+  - name: nginx
+    image: docker.io/nginx
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "50m"
+      limits:
+        memory: "128Mi"
+        cpu: "100m"
+####if resourse is there it will allocate otherwise it wont
+#### command to monitor is kubectl top      2. kubectl top pod pod-09
+ 
+
+ ######Create a namespace so that the resources you create in this exercise are isolated from the rest of your cluster.
