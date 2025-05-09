@@ -1,6 +1,12 @@
 
-#create a service acccount 
+# RBAC: Role-based access control (RBAC) is a method of regulating access to computer or network resources based on the roles of individual users within your organization.
+# Role or cluster to create: Role permission fpr namespace and for whole permission cluster.
 
+# A Role always sets permissions within a particular namespace; when you create a Role, you have to specify the namespace it belongs in.
+#ClusterRole, by contrast, is a non-namespaced resource. The resources have different names (Role and ClusterRole) because a Kubernetes object always has to be either namespaced or not namespaced; it can't be both.
+# command to check which service account to attach kubectl get pod debug -o yaml
+
+#create a service acccount 
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -18,3 +24,34 @@ spec:
   containers:
       - name: debug
         image: rkalluru/debug
+
+### creating role
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: pod-reader
+rules:
+- apiGroups: [""] 
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+
+#### takes the role and associate to service account through role binidng or cluster binding.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-ns-pod-reader-to-debug-sa
+  namespace: default
+roleRef:
+  kind: Role #this must be Role or ClusterRole
+  name: default-ns-pod-reader-to-debug-sa # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: debug
+  namespace: default
+
+### commands to practice to login to pod kubectl exec -it debug --bash
