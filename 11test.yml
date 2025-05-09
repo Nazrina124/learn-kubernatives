@@ -55,3 +55,9 @@ subjects:
 - kind: ServiceAccount
   name: debug
   namespace: default
+
+
+  ##### cluster role to deal with another role for namespace
+
+  
+
