@@ -22,3 +22,62 @@ spec:
  
 
  ######Create a namespace so that the resources you create in this exercise are isolated from the rest of your cluster.
+
+#  eg. of namespace quota
+# apiVersion: v1
+# kind: ResourceQuota
+# metadata:
+#   name: namespace-limits  #### It will not create more than 1Gi
+# spec:
+#   hard:
+#     requests.cpu: "1"
+#     requests.memory: 1Gi
+#     limits.cpu: "2"
+#     limits.memory: 2Gi
+#     pods: "5"
+
+# apiVersion: "v1"
+# kind: "LimitRange"
+# metadata:
+#   name: "permissive-resource-limits"  It will not create pod if exceeseds limit of 20mi
+# spec:
+#   limits:
+#     -
+#       type: "Container"
+#       max:
+#         memory: "20Mi"
+#         cpu: "1" 
+#       min:
+#         memory: "6Mi"
+#         cpu: "1m"
+
+# apiVersion: "v1"
+# kind: "LimitRange"
+# metadata:
+#   name: "restrictive-resource-limits" 
+# spec:
+#   limits:
+#     -
+#       type: "Container"
+#       max:
+#         memory: "20Mi"
+#         cpu: "1" 
+#       min:
+#         memory: "10Mi"
+#         cpu: "1m"
+
+
+# To create namespace in cobtainer with limit
+#  spec:
+#       containers:
+#       - name: app1
+#         image: registry.k8s.io/hpa-example
+#         ports:
+#         - containerPort: 80
+#         resources:
+#           limits:
+#             cpu: 500m
+#           requests:
+#             cpu: 200m
+            # memory: 8Mi
+

@@ -1,0 +1,20 @@
+
+#create a service acccount 
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: debug
+  namespace: default
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  namespace: defualt
+spec:
+  containers:
+      - name: debug
+        image: rkalluru/debug
