@@ -23,8 +23,8 @@ metadata:
 spec:
   serviceAccountName: debug
   containers:
-      - name: debug
-        image: rkalluru/debug
+    - name: debug
+      image: rkalluru/debug
 
 ### creating role
 
@@ -37,7 +37,7 @@ metadata:
 rules:
 - apiGroups: [""] 
   resources: ["pods"]
-  verbs: ["get", "watch", "list"]
+  verbs: ["get", "watch", "list", "delete"]
 
 #### takes the role and associate to service account through role binidng or cluster binding.
 
