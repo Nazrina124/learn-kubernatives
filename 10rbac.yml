@@ -21,8 +21,8 @@ metadata:
   name: debug
   namespace: default
 spec:
-  containers:
   serviceAccountName: debug
+  containers:
       - name: debug
         image: rkalluru/debug
 
