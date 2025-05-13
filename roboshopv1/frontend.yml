@@ -23,7 +23,7 @@ metadata:
   name: frontend
   namespace: roboshop
   labels:
-  appName: frontend
+   appName: frontend
 spec:
   containers:
     - name: frontend
