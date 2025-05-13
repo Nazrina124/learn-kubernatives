@@ -25,7 +25,7 @@ metadata:
 spec:
   containers:
     - name: frontend
-      image: public.ecr.aws/w8x4g9h7/roboshop-v3/fro
+      image: public.ecr.aws/w8x4g9h7/roboshop-v3/frontend
   env:
     - name: CATALOGUE_HOST
       value: "catalogue"
