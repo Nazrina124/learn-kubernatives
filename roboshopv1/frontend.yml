@@ -51,7 +51,7 @@ spec:
           value: "8080"
 
 #docker run -d -p 80:80 -e CATALOGUE_HOST=catalogue-ip -e CATALOGUE_PORT=catalogue-port -e USER_HOST=user-host -e USER_PORT=user-port -e CART_HOST=cart-host -e CART_PORT=cart-port -e SHIPPING_HOST=shipping-host -e SHIPPING_PORT=shipping-port -e PAYMENT_HOST=payment-host -e PAYMENT_PORT=payment-port  public.ecr.aws/w8x4g9h7/roboshop-v3/frontend
-
+# kubecctl get svc -n roboshop  to get 
 
 
 
