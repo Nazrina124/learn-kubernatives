@@ -25,7 +25,7 @@ spec:
       image: public.ecr.aws/w8x4g9h7/roboshop-v3/user
       env:
         - name: MONGO_URL
-          value: "mongodb://mongo-ip:27017/users"
+          value: "mongodb://mongo-redis.dev.naifah.online:27017/users"
         - name: MONGO
           value: "true"
         - name: REDIS_URL
